@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 
 class UserNameCubit extends Cubit<String> {
-  UserNameCubit() : super('');
+  UserNameCubit() : super('no-username');
 
   setUserName(String name) => emit(name);
 }

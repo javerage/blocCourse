@@ -1,16 +1,25 @@
+import 'package:bloccourse/01_cubit/01-simple_cubit/presentation/blocs/blocs.dart';
 import 'package:bloccourse/01_cubit/01-simple_cubit/presentation/screens/screens.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const BlocsProviders());
 }
 
-class BlocPro extends StatelessWidget {
-  const BlocPro({super.key});
+class BlocsProviders extends StatelessWidget {
+  const BlocsProviders({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => UserNameCubit(),
+        ),
+      ],
+      child: const MyApp(),
+    );
   }
 }
 
@@ -20,6 +29,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: const UserNameScreen(),
     );
   }
