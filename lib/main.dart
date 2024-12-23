@@ -1,5 +1,6 @@
 import 'package:bloccourse/01_cubit/01-simple_cubit/presentation/blocs/blocs.dart';
-import 'package:bloccourse/01_cubit/01-simple_cubit/presentation/screens/screens.dart';
+import 'package:bloccourse/01_cubit/02-cubit_router/presentation/blocs/blocs.dart';
+import 'package:bloccourse/01_cubit/02-cubit_router/presentation/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,6 +18,9 @@ class BlocsProviders extends StatelessWidget {
         BlocProvider(
           create: (context) => UserNameCubit(),
         ),
+        BlocProvider(
+          create: (context) => RouterSimpleCubit()
+        )
       ],
       child: const MyApp(),
     );
@@ -28,9 +32,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    final appRouter = context.watch<RouterSimpleCubit>().state;
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      home: const UserNameScreen(),
+      title: 'Bloc Course',
+      routerConfig: appRouter,
     );
   }
 }
